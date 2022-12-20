@@ -1,0 +1,714 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red255\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\ul\b\f0\fs24\lang9 AngularJS\ulnone\b0\fs22\par
+AngularJS extends HTML with new attributes. AngularJS is perfect for Single Page Applications (SPAs).\par
+\par
+Basics of AngularJS: directives, expressions, filters, modules, and controllers. Events, DOM, Forms, Input, Validation, Http, and more. \par
+\par
+Before you study AngularJS, you should have a basic understanding of: \par
+HTML\par
+CSS\par
+JavaScript\par
+\par
+AngularJS is a \b JavaScript framework\b0 . It can be added to an HTML page with a <\b script\b0 > tag.\par
+\cf1 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+\cf0 AngularJS extends HTML attributes with \b Directives\b0 , and binds data to HTML with \b Expressions\b0 .\par
+\par
+AngularJS extends HTML with \b ng-directives\b0 .\par
+The \b ng-app \b0 directive defines an AngularJS application.\par
+The \b ng-model \b0 directive binds the value of HTML controls (input, select, textarea) to application data.\par
+The \b ng-bind \b0 directive binds application data to the HTML view.\par
+\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div \b ng-app\b0 ="">\par
+  <p>Name: <input type="text\b " ng-model\b0 ="name"></p>\par
+  <p \b ng-bind\b0 ="name"></p>\par
+</div>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+Example explained:\par
+\par
+AngularJS starts automatically when the web page has loaded.\par
+The \b ng-app \b0 directive tells AngularJS that the <div> element is the "owner" of an AngularJS application.\par
+The ng-model directive binds the value of the input field to the application variable name.\par
+The ng-bind directive binds the content of the <p> element to the application variable name.\par
+\par
+\b AngularJS Directives\par
+\b0 As you have already seen, AngularJS directives are HTML attributes with an \ul\b ng \ulnone\b0 prefix.\par
+The \b ng-init \b0 directive initializes AngularJS application variables.\par
+\par
+\cf1 <div ng-app="" \b ng-init\b0 ="firstName='\b John\b0 '">\par
+<p>The name is <span ng-bind="firstName"></span></p>\par
+</div>\par
+\cf0 You can use \b data-ng-\b0 , instead of \b ng-\b0 , if you want to make your page HTML valid.\par
+\par
+\b AngularJS Expressions\par
+\b0 AngularJS expressions are written inside double braces: \b\{\{ expression \}\}.\b0\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+<div \b ng-app\b0 ="">\par
+  <p>My first expression: \b\{\{ 5 + 5 \}\}\b0 </p>\par
+</div>\par
+</body>\par
+</html>\par
+\cf0 AngularJS expressions bind AngularJS data to HTML the same way as the ng-bind directive.\par
+The \b ng-app directive \b0 defines the application, the \b ng-controller \b0 directive defines the controller.\par
+\cf1 <div ng-app="myApp" ng-controller="myCtrl">\par
+\par
+First Name: <input type="text" ng-model="firstName"><br>\par
+Last Name: <input type="text" ng-model="lastName"><br>\par
+<br>\par
+Full Name: \{\{firstName + " " + lastName\}\}\par
+\par
+</div>\par
+\par
+<script>\par
+var app = angular.module('myApp', []);\par
+app.controller('myCtrl', function($scope) \cf2\b\{\cf1\b0\par
+  $scope.firstName= "John";\par
+  $scope.lastName= "Doe";\par
+\cf2\b\}\cf1\b0 )\cf2\b ;\cf1\b0\par
+</script>\par
+\cf0 If you remove the ng-app directive, HTML will display the expression as it is, without solving it. \par
+\par
+\ul Change the color of the input box below, by changing its value:\par
+\cf1\ulnone <div ng-app="" \b ng-init\b0 ="\ul myCol\ulnone ='lightblue'">\par
+<input style="background-color:\b\{\{myCol\}\}\b0 " \ul ng-model\ulnone ="\ul myCol\ulnone ">\par
+</div>\par
+\cf0\par
+AngularJS numbers are like JavaScript numbers:\par
+\cf1 <div ng-app="" ng-init="quantity=1\cf2 ;\cf1 cost=5">\par
+<p>Total in dollar: \{\{ quantity * cost \}\}</p>\par
+</div>\par
+\cf0\par
+Same example using ng-bind:\par
+\cf1 <div ng-app="" ng-init="quantity=1;cost=5">\par
+<p>Total in dollar: <span \b ng-bind\b0 ="quantity * cost"></span></p>\par
+</div>\par
+\cf0\par
+\ul AngularJS Expressions vs. JavaScript Expressions\par
+\ulnone Unlike JavaScript expressions, AngularJS expressions can be written inside HTML.\par
+AngularJS expressions do not support conditionals, loops, and exceptions, while JavaScript expressions do.\par
+AngularJS expressions support filters, while JavaScript expressions do not.\par
+\par
+\ul AngularJS Modules\par
+\ulnone An AngularJS module defines an application. The module is a container for the different parts of an application. \par
+\cf1 <div ng-app="myApp">...</div>\par
+<script>\par
+var app = \b angular.module\b0 ("myApp", []);\par
+</script>\par
+\cf0 The "myApp" parameter refers to an HTML element in which the application will run.\par
+\par
+Add a controller to your application, and refer to the controller with the \b ng-controller \b0 directive:\par
+\cf1 <div ng-app="myApp" \b ng-controller\b0 ="myCtrl">\par
+\{\{ firstName + " " + lastName \}\}\par
+</div>\par
+<script>\par
+\par
+var app = angular.module("myApp", []);\par
+\par
+app.controller("myCtrl", function($scope) \{\par
+  $scope.firstName = "John";\par
+  $scope.lastName = "Doe";\par
+\});\par
+</script>\par
+\cf0\par
+AngularJS has a set of built-in directives which you can use to add functionality to your application. In addition you can use the module to add your own directives to your applications: \par
+\cf1 <div ng-app="myApp" w3-test-directive></div>\par
+<script>\par
+var app = angular.module("myApp", []);\par
+app.directive("w3TestDirective", function() \{\par
+  return \{\par
+    template : "I was made in a directive constructor!"\par
+  \};\par
+\});\par
+</script>\par
+\cf0\par
+\ul\b Modules and Controllers in Files\par
+\ulnone\b0 It is common in AngularJS applications to put the module and the controllers in JavaScript files.\par
+In this example, "myApp.js" contains an application module definition, while "myCtrl.js" contains the controller:\par
+\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script \ul\b src\ulnone\b0 ="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="myCtrl">\par
+\{\{ firstName + " " + lastName \}\}\par
+</div>\par
+\par
+<script \ul\b src\ulnone\b0 ="myApp.js"></script>\par
+<script \ul\b src\ulnone\b0 ="myCtrl.js"></script>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+myApp.js\par
+var app = angular.module("myApp", \cf1 []);\cf0\par
+The [] parameter in the module definition can be used to define dependent modules.\par
+Without the [] parameter, you are not creating a new module, but retrieving an existing one.\par
+\par
+myCtrl.js\par
+\cf1 app.controller("myCtrl", function($scope) \{\par
+  $scope.firstName = "John";\par
+  $scope.lastName= "Doe";\par
+\});\par
+\cf0\par
+The \b ng-app \b0 directive initializes an AngularJS application. The \b ng-init \b0 directive initializes application data. The \b ng-model \b0 directive binds the value of HTML controls (input, select, textarea) to application data. \par
+\par
+\ul\b Data Binding\par
+\ulnone\b0 Data binding in AngularJS binds AngularJS expressions with AngularJS data.\par
+\{\{ firstName \}\} is bound with ng-model="firstName". \par
+\par
+The \b ng-repeat \b0 directive repeats an HTML element:\par
+\cf1 <div ng-app="" ng-init="names=['\b Jani','Hege','Kai\b0 ']">\par
+  <ul>\par
+    <li \b ng-repeat\b0 ="x in \b names\b0 ">\par
+      \{\{ x \}\}\par
+    </li>\par
+  </ul>\par
+</div>\par
+\cf0 The ng-app directive defines the \b root element \b0 of an AngularJS application.\par
+The ng-app directive will \b auto-bootstrap \b0 (automatically initialize) the application when a web page is loaded.\par
+\par
+\ul\b Create New Directives\par
+\ulnone\b0 New directives are created by using the .directive function. To invoke the new directive, make an HTML element with the same tag name as the new directive. When naming a directive, you must use a camel case name, \b w3TestDirective\b0 , but when invoking it, you must use \cf2\b -\cf0\b0  separated name, \cf1 w3-test-directive\cf0 : \par
+\par
+\cf1 <body ng-app="myApp">\par
+<w3-test-directive></w3-test-directive>\par
+<script>\par
+var app = angular.module("myApp", []);\par
+app.directive("w3TestDirective", function() \{\par
+  return \{\par
+    template : "<h1>Made by a directive!</h1>"\par
+  \};\par
+\});\par
+</script>\par
+</body>\par
+\cf0\par
+The ng-model directive can provide type validation for application data (number, e-mail, required): \par
+\cf1 <form ng-app="" name="myForm">\par
+  Email:\par
+  <input \b type\b0 ="email" name="myAddress" ng-model="text">\par
+  <span \b ng-show\b0 ="myForm.myAddress.$error.email">Not a valid e-mail address</span>\par
+</form>\par
+\cf0\par
+The data model is a collection of data available for the application. The HTML container where the AngularJS application is displayed, is called the view. The view has access to the model, and there are several ways of displaying model data in the view. \par
+\par
+The scope is the binding part between the HTML (view) and the JavaScript (controller). The scope is an object with the available properties and methods.\par
+\par
+\ul AngularJS provides filters to transform data:\par
+\ulnone\b currency \b0 Format a number to a currency format.\par
+\b date \b0 Format a date to a specified format.\par
+\b filter \b0 Select a subset of items from an array.\par
+\b json \b0 Format an object to a JSON string.\par
+\b limitTo \b0 Limits an array/string, into a specified number of elements/characters.\par
+\b lowercase \b0 Format a string to lower case.\par
+\b number \b0 Format a number to a string.\par
+\b orderBy \b0 Orders an array by an expression.\par
+\b uppercase \b0 Format a string to upper case.\par
+\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="personCtrl">\par
+\par
+<p>The name is \{\{ lastName \b | uppercase \b0\}\}</p>\par
+\par
+</div>\par
+\par
+<script>\par
+angular.module('myApp', []).controller('personCtrl', function($scope) \{\par
+    $scope.firstName = "John",\par
+    $scope.lastName = "Doe"\par
+\});\par
+</script>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\ul The \b orderBy \b0 filter sorts an array:\par
+\ulnone\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="namesCtrl">\par
+\par
+<p>Looping with objects:</p>\par
+<ul>\par
+  <li ng-repeat="x in names \ul\b | orderBy:'country'\ulnone\b0 ">\par
+    \{\{ x.name + ', ' + x.country \}\}\par
+  </li>\par
+</ul>\par
+\par
+</div>\par
+\par
+<script>\par
+angular.module('myApp', []).controller('namesCtrl', function($scope) \{\par
+    $scope.names = [\par
+        \{name:'Jani',country:'Norway'\},\par
+        \{name:'Carl',country:'Sweden'\},\par
+        \{name:'Margareth',country:'England'\},\par
+        \{name:'Hege',country:'Norway'\},\par
+        \{name:'Joe',country:'Denmark'\},\par
+        \{name:'Gustav',country:'Sweden'\},\par
+        \{name:'Birgit',country:'Denmark'\},\par
+        \{name:'Mary',country:'England'\},\par
+        \{name:'Kai',country:'Norway'\}\par
+        ];\par
+\});\par
+</script>\par
+\par
+</body>\par
+</html>\par
+\par
+\cf0\ul Return the names that contains the letter "i":\par
+\cf1\ulnone <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="namesCtrl">\par
+\par
+<ul>\par
+  <li ng-repeat="x in names \b | filter : 'i'">\b0\par
+    \{\{ x \}\}\par
+  </li>\par
+</ul>\par
+\par
+</div>\par
+\par
+<script>\par
+angular.module('myApp', []).controller('namesCtrl', function($scope) \{\par
+    $scope.names = [\par
+        'Jani',\par
+        'Carl',\par
+        'Margareth',\par
+        'Hege',\par
+        'Joe',\par
+        'Gustav',\par
+        'Birgit',\par
+        'Mary',\par
+        'Kai'\par
+    ];\par
+\});\par
+</script>\par
+\par
+<p>This example displays only the names containing the letter "i".</p>\par
+\par
+</body>\par
+</html>\par
+\par
+\cf0\ul\b Type a letter in the input field, and the list will shrink/grow depending on the match:\par
+\cf1\ulnone\b0 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="namesCtrl">\par
+\par
+<p>Type a letter in the input field:</p>\par
+\par
+<p><input type="text" \b ng-model="test\b0 "></p>\par
+\par
+<ul>\par
+  <li ng-repeat="x in names \b | filter:test\b0 ">\par
+    \{\{ x \}\}\par
+  </li>\par
+</ul>\par
+\par
+</div>\par
+\par
+<script>\par
+angular.module('myApp', []).controller('namesCtrl', function($scope) \{\par
+    $scope.names = [\par
+        'Jani',\par
+        'Carl',\par
+        'Margareth',\par
+        'Hege',\par
+        'Joe',\par
+        'Gustav',\par
+        'Birgit',\par
+        'Mary',\par
+        'Kai'\par
+    ];\par
+\});\par
+</script>\par
+\par
+<p>The list will only consists of names matching the filter.</p>\par
+\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\ul Use the $http service to request data from the server:\par
+\cf1\ulnone var app = angular.module('myApp', []);\par
+app.controller('myCtrl', function($scope, $http) \{\par
+  \b $http.get\b0 ("welcome.htm").then(function (response) \{\par
+    $scope.myWelcome = response.data;\par
+  \});\par
+\});\par
+\ul\b\par
+\cf0\b0 The $timeout Service\par
+\ulnone The $timeout service is AngularJS' version of the window.setTimeout function. Display a new message after two seconds:\par
+\cf1 var app = angular.module('myApp', []);\par
+app.controller('myCtrl', function($scope, $timeout) \{\par
+  $scope.myHeader = "Hello World!";\par
+  \b $timeout\b0 (function () \{\par
+    $scope.myHeader = "How are you today?";\par
+  \}, 2000);\par
+\});\par
+\cf0\ul Display the time every second:\par
+\cf1\ulnone var app = angular.module('myApp', []);\par
+app.controller('myCtrl', function($scope, $interval) \{\par
+  $scope.theTime = new Date().toLocaleTimeString();\par
+  \b $interval\b0 (function () \{\par
+    $scope.theTime = new Date().toLocaleTimeString();\par
+  \}, 1000);\par
+\});\par
+\cf0\par
+\ul Displaying Data in a Table\par
+\cf1\ulnone <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="customersCtrl"> \par
+\par
+<table>\par
+  <tr ng-repeat="x in names">\par
+\b     <td>\{\{ x.Name \}\}</td>\par
+    <td>\{\{ x.Country \}\}</td>\par
+\b0   </tr>\par
+</table>\par
+\par
+</div>\par
+\par
+<script>\par
+var app = angular.module('myApp', []);\par
+app.controller('customersCtrl', function($scope, $http) \{\par
+    $http.get("customers.php")\par
+    .then(function (response) \{$scope.names = response.data.records;\});\par
+\});\par
+</script>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\par
+\ul To display the table index, add a <td> with $index: \par
+\cf1\ulnone <!DOCTYPE html>\par
+<html>\par
+<style>\par
+\b table, th , td  \{\par
+\b0   border: 1px solid grey;\par
+  border-collapse: collapse;\par
+  padding: 5px;\par
+\}\par
+table \b tr:nth-child\b0 (odd) \{\par
+  background-color: #f1f1f1;\par
+\}\par
+table \b tr:nth-child\b0 (even) \{\par
+  background-color: #ffffff;\par
+\}\par
+</style>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body>\par
+\par
+<div ng-app="myApp" ng-controller="customersCtrl"> \par
+\par
+<table>\par
+  <tr ng-repeat="x in names">\par
+\b     <td>\{\{ $index + 1 \}\}</td>\par
+\b0     <td>\{\{ x.Name \}\}</td>\par
+    <td>\{\{ x.Country \}\}</td>\par
+  </tr>\par
+</table>\par
+\par
+</div>\par
+\par
+<script>\par
+var app = angular.module('myApp', []);\par
+app.controller('customersCtrl', function($scope, $http) \{\par
+    $http.get("customers.php")\par
+    .then(function (response) \{$scope.names = response.data.records;\});\par
+\});\par
+</script>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\ul Using $even and $odd\par
+\cf1\ulnone <table>\par
+  <tr ng-repeat="x in names">\par
+    <td \b ng-if\b0 ="$\b odd\b0 " \b style="background-color:#f1f1f1\b0 ">\{\{ x.Name \}\}</td>\par
+    <td \b ng-if\b0 ="$\b even\b0 ">\{\{ x.Name \}\}</td>\par
+    <td \b ng-if\b0 ="$\b odd\b0 " style="background-color:#f1f1f1">\{\{ x.Country \}\}</td>\par
+    <td \b ng-if\b0 ="$\b even\b0 ">\{\{ x.Country \}\}</td>\par
+  </tr>\par
+</table>\par
+\cf0\par
+\ul To create a dropdown list, based on an object or an array in AngularJS, you should use the ng-options directive:\ulnone\par
+\cf1 <div ng-app="myApp" ng-controller="myCtrl">\par
+\par
+<\b select \b0 ng-model="selectedName" \b ng-options\b0 ="x for x in \b names\b0 ">\par
+</select>\par
+\par
+</div>\par
+\par
+<script>\par
+var app = angular.module('myApp', []);\par
+app.controller('myCtrl', function($scope) \{\par
+  $scope.\b names \b0 = ["Emil", "Tobias", "Linus"];\par
+\});\par
+</script>\par
+\cf0\par
+\ul You can also use the ng-repeat directive to make the same dropdown list:\par
+\cf1\ulnone <select>\par
+  <\b option \b0 ng-repeat="x in \b names\b0 ">\{\{x\}\}</option>\par
+</select>\par
+\cf0\ul In the previous examples the data source was an array, but we can also use an object. Assume you have an object with key-value pairs:\ulnone\par
+\cf1 $scope.cars = \{\par
+  car01 : "Ford",\par
+  car02 : "Fiat",\par
+  car03 : "Volvo"\par
+\};\par
+\cf0 Using an object as the data source, \cf1\b x \cf0\b0 represents the key, and \cf1\b y\cf0\b0  represents the value:\par
+\cf1 <select ng-model="selectedCar" ng-options="x for \b (x, y) \b0 in cars">\par
+</select>\par
+<h1>You selected: \{\{selectedCar\}\}</h1>\par
+\par
+\cf0\ul AngularJS is perfect for displaying data from a Database. Just make sure the data is in JSON format.\ulnone\par
+\ul Fetching Data From a PHP Server Running MySQL\par
+\cf1\ulnone <div ng-app="myApp" ng-controller="customersCtrl">\par
+\par
+<table>\par
+  <tr ng-repeat="x in names">\par
+    <td>\{\{ x.Name \}\}</td>\par
+    <td>\{\{ x.Country \}\}</td>\par
+  </tr>\par
+</table>\par
+\par
+</div>\par
+\par
+<script>\par
+var app = angular.module('myApp', []);\par
+app.controller('customersCtrl', function($scope, $http) \{\par
+  $http.get("customers_mysql.php")\par
+  .then(function (response) \{$scope.names = response.data.records;\});\par
+\});\par
+</script>\par
+\cf0\par
+\b Cross-Site HTTP Requests\par
+\b0 A request for data from a different server (other than the requesting page), are called cross-site HTTP requests. \par
+Cross-site requests are common on the web. Many pages load CSS, images, and scripts from different servers.\par
+In modern browsers, cross-site HTTP requests from scripts are restricted to same site for security reasons.\par
+The following line, in our PHP examples, has been added to allow cross-site access.\par
+\cf1 header("Access-Control-Allow-Origin: *");\par
+\cf0\ul\b Server Code ASP.NET, VB and MS Access\par
+\cf1\ulnone\b0 <%@ Import Namespace="System.IO"%>\par
+<%@ Import Namespace="System.Data"%>\par
+<%@ Import Namespace="System.Data.OleDb"%>\par
+<%\par
+\b Response.AppendHeader("Access-Control-Allow-Origin", "*")\b0\par
+Response.AppendHeader("Content-type", "application/json")\par
+Dim conn As OleDbConnection\par
+Dim objAdapter As OleDbDataAdapter\par
+Dim objTable As DataTable\par
+Dim objRow As DataRow\par
+Dim objDataSet As New DataSet()\par
+Dim outp\par
+Dim c\par
+conn = New OledbConnection("Provider=Microsoft.Jet.OLEDB.4.0;data source=Northwind.mdb")\par
+objAdapter = New OledbDataAdapter("SELECT CompanyName, City, Country FROM Customers", conn)\par
+objAdapter.Fill(objDataSet, "myTable")\par
+objTable=objDataSet.Tables("myTable")\par
+\par
+outp = ""\par
+c = chr(34)\par
+for each x in objTable.Rows\par
+if outp <> "" then outp = outp & ","\par
+outp = outp & "\{" & c & "Name"    & c & ":" & c & x("CompanyName") & c & ","\par
+outp = outp &       c & "City"    & c & ":" & c & x("City")        & c & ","\par
+outp = outp &       c & "Country" & c & ":" & c & x("Country")     & c & "\}"\par
+next\par
+\par
+outp ="\{" & c & "records" & c & ":[" & outp & "]\}"\par
+response.write(outp)\par
+conn.close\par
+%>\par
+\cf0\par
+\ul\b Server Code ASP.NET, Razor C# and SQL Lite\par
+\ulnone\b0 @\{\par
+Response.AppendHeader("Access-Control-Allow-Origin", "*")\par
+Response.AppendHeader("Content-type", "application/json")\par
+var db = Database.Open("Northwind");\par
+var query = db.Query("SELECT CompanyName, City, Country FROM Customers");\par
+var outp =""\par
+var c = chr(34)\par
+\}\par
+@foreach(var row in query)\{\par
+if (outp != "") \{outp = outp + ","\}\par
+outp = outp + "\{" + c + "Name"    + c + ":" + c + @row.CompanyName + c + ","\par
+outp = outp +       c + "City"    + c + ":" + c + @row.City        + c + ","\par
+outp = outp +       c + "Country" + c + ":" + c + @row.Country     + c + "\}"\par
+\}\par
+outp ="\{" + c + "records" + c + ":[" + outp + "]\}"\par
+@outp\par
+\par
+\par
+\ul Use the HTML5 attribute required to specify that the input field must be filled out:\par
+\ulnone\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>  \par
+<body ng-app="">\par
+\par
+<p>Try writing in the input field:</p>\par
+\par
+<form name="myForm">\par
+<input name="myInput" ng-model="myInput" \b required\b0 >\par
+</form>\par
+\par
+<p>The input's valid state is:</p>\par
+<h1>\{\{myForm.myInput.$valid\}\}</h1>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\ul Apply styles, using standard CSS:\par
+\cf1\ulnone <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>  \par
+\b <style>\par
+input.ng-invalid \{\par
+    background-color:pink;\par
+\}\par
+input.ng-valid \{\par
+    background-color:lightgreen;\par
+\}\par
+\b0 </style>\par
+<body ng-app="">\par
+\par
+<p>Try writing in the input field:</p>\par
+\par
+<form name="myForm">\par
+<input name="myName" ng-model="myName" required>\par
+</form>\par
+\par
+<p>The input field requires content, and will therefore become green when you write in it.</p>\par
+\par
+</body>\par
+</html>\par
+\par
+\cf0\ul With AngularJS, you can include HTML content using the \b ng-include \b0 directive:\cf1\par
+\ulnone <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<body ng-app="">\par
+\par
+<div \b ng-include\b0 ="'myFile.htm'"></div>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\ul To make your applications ready for animations, you must include the AngularJS Animate library:\ulnone\par
+\cf1 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/\b angular-animate.js\b0 "></script>\cf0\par
+\par
+\ul Then you must refer to the ngAnimate module in your application:\par
+\cf1\ulnone <body ng-app="\b ngAnimate\b0 ">\par
+\cf0\par
+\ul CSS Transitions\par
+\ulnone CSS transitions allows you to change CSS property values smoothly, from one value to another, over a given duration.\par
+When the DIV element gets the .ng-hide class, the transition will take 0.5 seconds, and the height will smoothly change from 100px to 0:\par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+\b <style>\par
+div \{\par
+  transition: all linear 0.5s;\par
+  background-color: lightblue;\par
+  height: 100px;\par
+\}\par
+\par
+.ng-hide \{\par
+  height: 0;\par
+\}\par
+\par
+</style>\par
+\b0 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>\par
+\par
+<body ng-app="myApp">\par
+\par
+<h1>Hide the DIV: <input type="checkbox" ng-model="myCheck"></h1>\par
+\par
+<div ng-hide="myCheck"></div>\par
+\par
+<script>\par
+var app = angular.module('myApp', ['ngAnimate']);\par
+</script>\par
+\par
+</body>\par
+</html>\par
+\cf0\par
+\ul Style your application using the W3.CSS stylesheet:\par
+\cf1\ulnone <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">\par
+\cf0\par
+\ul AngularJS Routing\par
+\ulnone The \b ngRoute \b0 module helps your application to become a Single Page Application. If you want to navigate to different pages in your application, but you also want the application to be a SPA (Single Page Application), with no page reloading, you can use the ngRoute module. \par
+\cf1 <!DOCTYPE html>\par
+<html>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>\par
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>\par
+\par
+<body ng-app="myApp">\par
+\par
+<p><a href="#/!">Main</a></p>\par
+\par
+<a href="#!red">Red</a>\par
+<a href="#!green">Green</a>\par
+<a href="#!blue">Blue</a>\par
+\par
+<div ng-view></div>\par
+\par
+<script>\par
+var app = angular.module("myApp", ["ngRoute"]);\par
+app.config(function($routeProvider) \{\par
+    $routeProvider\par
+    .when("/", \{\par
+        templateUrl : "main.htm"\par
+    \})\par
+    .when("/red", \{\par
+        templateUrl : "red.htm"\par
+    \})\par
+    .when("/green", \{\par
+        templateUrl : "green.htm"\par
+    \})\par
+    .when("/blue", \{\par
+        templateUrl : "blue.htm"\par
+    \});\par
+\});\par
+</script>\par
+\par
+<p>Click on the links to navigate to "red.htm", "green.htm", "blue.htm", or back to "main.htm"</p>\par
+</body>\par
+</html>\par
+\cf0\par
+\par
+\par
+\cf1\par
+}
+ 
